@@ -1,24 +1,39 @@
-# README
+# Game Review&Sharing
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+ゲームをレビュー、情報共有ができるサイト。
+ゲームの検索、レビューとコメントの閲覧は登録なしで利用可能。
+ゲストログインではレビューはできませんが、コメントは可能。
+会員登録すると、レビュー、スレッドの追加ができる。
+ゲームの追加は管理者のみ可能。
 
-Things you may want to cover:
+### サイトテーマ
+ゲームをプレイした感想を共有する。
 
-* Ruby version
+### テーマを選んだ理由
+ゲームのレビューサイトは多くありますが、
+そのゲームについて語り合う場所はあまりありません。
+レビューだけでなく、攻略情報や隠し要素の共有が一つのサイトでできたら便利だと思い、
+このテーマにしました。
 
-* System dependencies
+### ターゲットユーザー
+ゲームをたくさんプレイしている人からゲーム初心者まで
 
-* Configuration
+### 主な利用シーン
+ゲームをプレイした時、ゲームを買おうか迷っているとき
 
-* Database creation
+## 設計書(link)
+- [実装機能リスト](https://docs.google.com/spreadsheets/d/10w0C5OcfYNOgSt37F0mMMv5TYYKT7cPAA_orx-sMg_k/edit?usp=sharing)
+- [ER図]():まだありません
+- [テーブル定義書]():まだありません
+- [詳細設計]():まだありません
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+現在は未定
