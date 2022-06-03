@@ -24,9 +24,9 @@
 
 ## 設計書(link)
 - [実装機能リスト](https://docs.google.com/spreadsheets/d/10w0C5OcfYNOgSt37F0mMMv5TYYKT7cPAA_orx-sMg_k/edit?usp=sharing)
-- [ER図]():まだありません
-- [テーブル定義書]():まだありません
-- [詳細設計]():まだありません
+- [ER図](#):まだありません
+- [テーブル定義書](#):まだありません
+- [詳細設計](#):まだありません
 
 ## 開発環境
 - OS：Linux(CentOS)
