@@ -1,0 +1,52 @@
+<header class="mb-2 bg-info">
+  <nav class="navbar navbar-expand-lg navbar-light p-3">
+    <div class="container-fluid px-5">
+      <div>
+        <a class="navbar-brand" href="/">Game R&S</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <% if admin_signed_in? %>
+          <h4>管理者としてログイン中</h4>
+          <ul class="navbar-nav ml-auto">
+            <li>
+              <%= link_to 'Top', root_path, class: 'ml-4 text-light btn btn-outline-light' %>
+            </li>
+            <li>
+              <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'ml-4 text-light btn btn-outline-light' %>
+            </li>
+          </ul>
+        <% elsif customer_signed_in? %>
+          <h4>ログイン中</h4>
+          <ul class="navbar-nav ml-auto">
+            <li>
+              <%= link_to  'Top', root_path, class: 'ml-4 text-light btn btn-outline-light' %>
+            </li>
+            <li>
+              <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'ml-4 text-light btn btn-outline-light' %>
+            </li>
+          </ul>
+        <% else %>
+          <ul class="navbar-nav ml-auto">
+            <li>
+              <%= link_to  'About', about_path,class: 'ml-4 text-light btn btn-outline-light' %>
+            </li>
+            <li>
+              <%= link_to  '新規登録', new_customer_registration_path,class: 'ml-4 text-light btn btn-outline-light' %>
+            </li>
+            <li>
+              <%= link_to 'ログイン', new_customer_session_path ,class: 'ml-4 text-light btn btn-outline-light' %>
+            </li>
+          </ul>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- フラッシュメッセージ -->
+  <div id="flash_message">
+    <%= render 'layouts/flash_message' %>
+  </div>
+</header>
