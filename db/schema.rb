@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_173216) do
+ActiveRecord::Schema.define(version: 2022_06_11_153638) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,78 @@ ActiveRecord::Schema.define(version: 2022_06_10_173216) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "game_tags", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer "platform_id"
+    t.string "title"
+    t.text "introduction"
+    t.string "release_date"
+    t.integer "no_tax_price"
+    t.string "related_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "platforms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "review_comments", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "review_id"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "game_id"
+    t.integer "rate", default: 0, null: false
+    t.text "comment"
+    t.boolean "is_public", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sympathies", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "review_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "thread_boards", force: :cascade do |t|
+    t.integer "game_id"
+    t.string "title"
+    t.text "introduction"
+    t.boolean "no_spoiler", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "thread_messages", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "thread_id"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
