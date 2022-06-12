@@ -1,2 +1,42 @@
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+<div class='container'>
+  <div class="row">
+    <div class="my-2">
+      <h4 class="title">会員一覧</h4>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div id="customers_index">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>会員ID</th>
+          <th>ユーザーネーム</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <th><%= customer.id %></th>
+            <th>
+              <%= link_to customer_path(customer), class: "text-dark" do %>
+                <u><%= customer.name %></u>
+              <% end %>
+            </th>
+            <th><%= customer.email %></th>
+            <% if customer.is_active == true %>
+              <th class="text-success">有効</th>
+            <% else %>
+              <th class="text-muted">無効</th>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="mx-auto">
+      <%= paginate @customers %>
+    </div>
+  </div>
+</div>

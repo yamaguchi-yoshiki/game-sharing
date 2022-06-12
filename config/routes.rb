@@ -22,20 +22,22 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about' => 'homes#about', as: 'about'
     # 会員関連
+    resource :customers, only: [] do
+      get '/quit_check' => 'customers#quit_check'
+      patch '/withdraw' => 'customers#withdraw'
+    end
     resources :customers, only: [:show, :edit, :update] do
       # 会員ごとの一覧ページ
       resources :reviews, only: [:index]
       resources :thread_messages, only: [:index]
     end
-    get '/customers/quit_check' => 'customers#quit_check'
-    patch '/customers/withdraw' => 'customers#withdraw'
     # ゲーム関連
     resources :games do
       resources :reviews, only: [:new]
       resources :threads, only: [:index, :new]
     end
     # 機種ごとのゲーム一覧ページ
-    resources :platforms, only: [:show]
+    resources :platforms, only: [:index, :show]
     # レビュー関連
     resources :reviews, only: [:show, :create, :edit, :update, :destroy] do
       resource :sympathies, only: [:create, :destroy]

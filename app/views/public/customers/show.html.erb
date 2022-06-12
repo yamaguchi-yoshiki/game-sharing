@@ -1,2 +1,49 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class='container'>
+  <div class="row">
+    <div class="my-2">
+      <h4 class="title">会員詳細</h4>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-md-2 my-auto">
+      <h5 class="title">登録情報</h5>
+    </div>
+    <% if @customer == current_customer || admin_signed_in? %>
+      <div class="col-md-2">
+        <%= link_to "編集する", edit_customer_path(@customer), class: "btn btn-block btn-success" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td style="width: 20%">ユーザーネーム</td>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <td>紹介文</td>
+            <td><%= @customer.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-md-2 my-auto">
+      <h5>レビュー履歴</h5>
+    </div>
+    <div class="col-md-2">
+      <%= link_to "一覧を見る", customer_reviews_path(@customer), class: "btn btn-block btn-primary" %>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-md-2 my-auto">
+      <h5>スレッド投稿履歴</h5>
+    </div>
+    <div class="col-md-2">
+      <%= link_to "一覧を見る", customer_thread_messages_path(@customer), class: "btn btn-block btn-primary" %>
+    </div>
+  </div>
+</div>
