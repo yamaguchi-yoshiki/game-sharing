@@ -1,2 +1,29 @@
-<h1>Admin::Platforms#edit</h1>
-<p>Find me in app/views/admin/platforms/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="offset-md-1 my-2">
+      <h4 class="title">機種名編集</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mb-4">
+      <div id="platform_errors">
+        <%= render 'layouts/errors', obj: @platform %>
+      </div>
+
+      <%= form_with model: @platform, url: admin_platform_path, method: :patch, remote: false do |f| %>
+        <div class="row my-4">
+          <div class="col-md-2 offset-md-1 my-auto text-center">
+            機種名
+          </div>
+          <div class="col-md-4 my-auto">
+            <%= f.text_field :name, id: 'platform_field', class: 'form-control', placeholder: "機種名" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "変更を保存", class: 'btn btn-success' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

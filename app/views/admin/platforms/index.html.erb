@@ -1,2 +1,44 @@
-<h1>Admin::Platforms#index</h1>
-<p>Find me in app/views/admin/platforms/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="offset-md-1 my-2">
+      <h4 class="title">機種一覧・追加</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mb-4">
+      <div id="platform_errors">
+        <%= render 'layouts/errors', obj: @platform %>
+      </div>
+      <%= form_with model: @platform, url: admin_platforms_path, method: :post, remote: false do |f| %>
+        <div class="row my-4">
+          <div class="col-md-2 offset-md-1 my-auto text-center">
+            機種名
+          </div>
+          <div class="col-md-4">
+            <%= f.text_field :name, id: 'platform_field', class: 'form-control', placeholder: "機種名" %>
+          </div>
+          <div class="col-md-3">
+            <%= f.submit "新規登録", class: 'btn btn-success' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 ml-5">
+      <table class="table table-bordered">
+        <thead class="table-secondary">
+          <tr>
+            <th class="text-center">機種</th>
+            <th style="width: 40%"></th>
+          </tr>
+        </thead>
+        <tbody id="admin_platforms_index">
+          <%= render 'index', platforms: @platforms %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
