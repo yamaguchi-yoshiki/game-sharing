@@ -1,2 +1,86 @@
-<h1>Public::Games#show</h1>
-<p>Find me in app/views/public/games/show.html.erb</p>
+<div class='container'>
+  <div class="row">
+    <div class="col-md-1 mx-auto">
+      <%= image_tag @game.get_game_image, size:'100x100', class: "game_image" %>
+    </div>
+    <div class="col-md-9 mx-auto">
+      <span class="badge badge-info"><%= @game.platform.name %></span>
+      <h2><%= @game.title %></h2>
+    </div>
+  </div>
+  <div class="row mb-5">
+    <div class="col-md-3">
+      <h4>平均評価</h4>
+      <div><span id="#star-rate-<%= @game.id %>"></span></div>
+      <%= render "public/shared/star", review: nil, game: @game %>
+      <p>レビュー数: <%= @game.reviews.size %>件</p>
+      <p>平均評価: <strong><%= @game.reviews.average(:rate).to_f.round(1) %></strong>/10</p>
+    </div>
+    <div class="col-md-6">
+      <h4>ゲーム概要</h4></h4>
+      <span><%= @game.introduction %></span>
+    </div>
+    <div class="col-md-3">
+      <h4>infomation</h4>
+      <table class="table table-sm table-borderless">
+        <tbody>
+          <tr>
+            <td style='width: 40%'>発売日:</td>
+            <td style='width: 60%'><%= @game.release_date %></td>
+          </tr>
+          <tr>
+            <td>価格(税抜):</td>
+            <td><%= @game.no_tax_price %>円</td>
+          </tr>
+          <tr>
+            <td>機種:</td>
+            <td><%= @game.platform.name %></td>
+          </tr>
+          <tr>
+            <td>タグ:</td>
+            <td>
+              <% @tags.each do |tag| %>
+                <%= tag.name %>,
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>関連URL:</td>
+            <td><%= @game.related_url %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <%= link_to game_threads_path(@game), class: "btn btn-primary" do %>
+        <i class="far fa-comment-alt"></i>
+        <span> スレッド一覧 </span>
+        <span class="badge badge-light"><%= @game.thread_boards.size %></span>
+      <% end %>
+    </div>
+    <div class="col-3">
+      <%= link_to edit_game_path(@game), class: "btn btn-success" do %>
+        <i class="fas fa-edit"></i> 情報を編集する
+      <% end %>
+    </div>
+    <div class="col-2">
+      <%= link_to game_path(@game), class: "btn btn-danger" do %>
+        <i class="far fa-trash-alt"></i> 情報を削除する
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h4><%= @game.title %>のレビュー一覧</h4>
+      <div class="row">
+      <% @reviews.each do |review| %>
+        <div class="col-md-6"><%= review.customer.name %></div>
+        <div class="col-md-3"><span id="#star-rate-<%= review.id %>"></span></div>
+        <%= render "public/shared/star", review: review, game: nil %>
+        <div class="col-md-3">評価:<%= review.rate %></div>
+        <div class="col-md-12 border-bottom"><%= review.comment %></div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

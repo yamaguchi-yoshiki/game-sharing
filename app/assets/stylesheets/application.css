@@ -33,3 +33,7 @@ main {
 .title_text {
   vertical-align: middle;
 }
+
+.game_image {
+  object-fit: contain;
+}

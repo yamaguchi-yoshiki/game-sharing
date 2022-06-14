@@ -5,6 +5,8 @@ class Public::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @reviews = @game.reviews
+    @tags = @game.tags
   end
 
   def new
@@ -14,6 +16,12 @@ class Public::GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     if @game.save
+      thread_board = @game.thread_boards.new
+      thread_board.title = "雑談(自動生成)"
+      thread_board.introduction = "ゲームを追加すると自動で作られるスレッドです。
+      雑談など自由にお使いください。(過度なネタバレはしないようにお願いします。)"
+      thread_board.no_spoiler = true
+      thread_board.save
       redirect_to game_path(@game), notice: "ゲームを追加しました"
     else
       render "new"
@@ -42,8 +50,8 @@ class Public::GamesController < ApplicationController
 
   private
 
-  def platform_params
-    params.require(:platform).permit(
+  def game_params
+    params.require(:game).permit(
       :platform_id,
       :title,
       :introduction,

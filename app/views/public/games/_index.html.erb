@@ -4,26 +4,27 @@
       <th></th>
       <th>タイトル</th>
       <th>平均評価</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <% games.each do |game| %>
       <tr>
-        <td style='width: 10%'>
-          <%= image_tag game.get_game_image, size:'100x100' %>
+        <td style='width: 20%'>
+          <%= link_to game_path(game) do %>
+            <%= image_tag game.get_game_image, size:'100x100', class: "game_image" %>
+          <% end %>
         </td>
         <td>
-          <p>
-          <%= link_to admin_game_path(game), class: "text-light" do %>
-            <u><%= game.name %></u>
-          <% end %>
-          </p>
-          <p>発売日:<% game.release_date %></p>
+          <span>
+            <%= link_to game_path(game) do %>
+              <u><%= game.title %></u>
+            <% end %>
+          </span><br>
+          <span class="text-muted">発売日:<% game.release_date %></span>
         </td>
-        <td style='width: 20%'>rate</td>
-        <td style='width: 20%'>btn</td>
+        <td style='width: 20%'><span id="#star-rate-<%= game.id %>"></span></td>
       </tr>
+      <%= render "public/shared/star", review: nil, game: game %>
     <% end %>
   </tbody>
 </table>
