@@ -72,15 +72,32 @@
   <div class="row">
     <div class="col-md-12">
       <h4><%= @game.title %>のレビュー一覧</h4>
-      <div class="row">
-      <% @reviews.each do |review| %>
-        <div class="col-md-6"><%= review.customer.name %></div>
-        <div class="col-md-3"><span id="#star-rate-<%= review.id %>"></span></div>
-        <%= render "public/shared/star", review: review, game: nil %>
-        <div class="col-md-3">評価:<%= review.rate %></div>
-        <div class="col-md-12 border-bottom"><%= review.comment %></div>
+      <% if customer_signed_in? %>
+        <h5>あなたのレビュー</h5>
+        <% if @review == nil %>
+          <%= link_to "レビューを書く", new_game_review_path(@game), class: "btn btn-primary" %>
+        <% else %>
+          <div class="row">
+            <div class="col-md-6"><%= @review.customer.name %></div>
+            <div class="col-md-3"><span id="#star-rate-<%= @review.id %>"></span></div>
+            <%= render "public/shared/star", review: @review, game: nil %>
+            <div class="col-md-3">評価:<%= @review.rate %></div>
+            <div class="col-md-12 border-bottom"><%= @review.comment %></div>
+          </div>
+        <% end %>
+      <% elsif admin_signed_in? %>
+      <% else %>
+        <h5>ログインまたは新規登録してレビューを投稿しましょう</h5>
       <% end %>
-      </div>
+      <% @reviews.each do |review| %>
+        <div class="row">
+          <div class="col-md-6"><%= review.customer.name %></div>
+          <div class="col-md-3"><span id="#star-rate-<%= review.id %>"></span></div>
+          <%= render "public/shared/star", review: review, game: nil %>
+          <div class="col-md-3">評価:<%= review.rate %></div>
+          <div class="col-md-12 border-bottom"><%= review.comment %></div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

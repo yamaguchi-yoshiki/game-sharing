@@ -5,7 +5,8 @@ class Public::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @reviews = @game.reviews
+    @reviews = @game.reviews.where.not(customer_id: current_customer.id)
+    @review = @reviews.find_by(customer_id: current_customer.id)
     @tags = @game.tags
   end
 
