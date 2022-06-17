@@ -12,6 +12,13 @@ class Customer < ApplicationRecord
   has_many :review_comments, dependent: :destroy
   has_many :thread_messages, dependent: :destroy
 
+  def self.guest
+    find_or_create_by!(name: 'ゲストユーザー' ,email: 'guest@example.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.name = "ゲストユーザー"
+    end
+  end
+
   def active_for_authentication?
     super && (is_active == true)
   end

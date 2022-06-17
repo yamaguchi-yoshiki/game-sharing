@@ -1,6 +1,7 @@
 class Public::ReviewsController < ApplicationController
   def index
-    @reviews = Review.where(customer_id: params[:id])
+    @customer = Customer.find(params[:customer_id])
+    @reviews = Review.where(customer_id: @customer.id).latest.page(params[:page])
   end
 
   def show
@@ -9,7 +10,7 @@ class Public::ReviewsController < ApplicationController
 
   def new
     @review = Review.new
-    @game_id = params[:id]
+    @game = Game.find(params[:game_id])
   end
 
   def create

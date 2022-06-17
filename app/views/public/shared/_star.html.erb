@@ -1,27 +1,28 @@
 <!-- レビューフォーム評価入力用 -->
-<script type="text/javascript">
-  $('#star').raty({
-    number: 10,
-    hints: [1,2,3,4,5,6,7,8,9,10],
-    starOff: '<%= asset_path('star-off.png') %>',
-    starOn: '<%= asset_path('star-on.png') %>',
-    starHalf: '<%= asset_path('star-half.png') %>',
-    half: false,
-    readOnly: true,
-    scoreName: 'review[rate]'
-  });
-</script>
-
-<!-- レビュー評価表示用 -->
-<% if review.present? %>
+<% if review == nil && game == nil %>
   <script type="text/javascript">
-    $('#star-rate-<%= review.id %>').raty({
+    $('#star').raty({
       number: 10,
       hints: [1,2,3,4,5,6,7,8,9,10],
       starOff: '<%= asset_path('star-off.png') %>',
       starOn: '<%= asset_path('star-on.png') %>',
       starHalf: '<%= asset_path('star-half.png') %>',
-      half: true,
+      half: false,
+      scoreName: 'review[rate]'
+    });
+  </script>
+<% end %>
+
+<!-- レビュー評価表示用 -->
+<% if review.present? %>
+  <script type="text/javascript">
+    $('#star-review-<%= review.id %>').raty({
+      number: 10,
+      hints: [1,2,3,4,5,6,7,8,9,10],
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn: '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: false,
       readOnly: true,
       score: <%= review.rate %>
     });
@@ -31,7 +32,7 @@
 <!-- ゲーム平均評価表示用 -->
 <% if game.present? %>
   <script type="text/javascript">
-    $('#star-rate-<%= game.id %>').raty({
+    $('#star-game-<%= game.id %>').raty({
       number: 10,
       hints: [1,2,3,4,5,6,7,8,9,10],
       starOff: '<%= asset_path('star-off.png') %>',

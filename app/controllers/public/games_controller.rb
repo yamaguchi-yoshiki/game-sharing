@@ -5,8 +5,12 @@ class Public::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @reviews = @game.reviews.where.not(customer_id: current_customer.id)
-    @review = @reviews.find_by(customer_id: current_customer.id)
+    @reviews = @game.reviews.where.not(customer_id: current_customer.id).where(is_public: true)
+    @review = @game.reviews.find_by(customer_id: current_customer.id)
+    @thread_messages_count = 0
+    @game.thread_boards.each do |thread|
+      @thread_messages_count += thread.thread_messages.size
+    end
     @tags = @game.tags
   end
 

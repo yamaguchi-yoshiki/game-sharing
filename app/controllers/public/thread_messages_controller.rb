@@ -1,6 +1,6 @@
 class Public::ThreadMessagesController < ApplicationController
   def index
-    @thread_messages = ThreadMessage.where(customer_id: params[:id])
+    @thread_messages = ThreadMessage.where(customer_id: params[:customer_id])
   end
 
   def create
@@ -9,7 +9,7 @@ class Public::ThreadMessagesController < ApplicationController
       flash[:notice] = "メッセージを投稿しました"
     else
     end
-    render thread_path(params[:id])
+    redirect_to thread_path(params[:thread_id])
   end
 
   def destroy

@@ -19,24 +19,26 @@
       <tbody>
         <% @customers.each do |customer| %>
           <tr>
-            <th><%= customer.id %></th>
-            <th>
+            <td><%= customer.id %></td>
+            <td>
               <%= link_to customer_path(customer), class: "text-dark" do %>
                 <u><%= customer.name %></u>
               <% end %>
-            </th>
-            <th><%= customer.email %></th>
+            </td>
+            <td><%= customer.email %></td>
             <% if customer.is_active == true %>
-              <th class="text-success">有効</th>
+              <td class="text-success">有効</td>
             <% else %>
-              <th class="text-muted">無効</th>
+              <td class="text-muted">無効</td>
             <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <div class="mx-auto">
-      <%= paginate @customers %>
+    <div class="row">
+      <div class="mx-auto">
+        <%= paginate @customers %>
+      </div>
     </div>
   </div>
 </div>

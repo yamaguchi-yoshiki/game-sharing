@@ -1,2 +1,24 @@
-<h1>Public::Reviews#show</h1>
-<p>Find me in app/views/public/reviews/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6"><%= @review.customer.name %></div>
+        <div class="col-md-3"><span id="#star-rate-<%= @review.id %>"></span></div>
+        <%= render "public/shared/star", review: @review, game: nil %>
+        <div class="col-md-3">評価:<%= @review.rate %></div>
+
+        <div class="col-md-12"><%= @review.comment %></div>
+
+        <div class="col-md-1"><i class="fas fa-comment"></i> <%= @review.review_comments.size %></div>
+        <div class="col-md-1"><i class="fas fa-heart"></i></div>
+        <% if admin_signed_in? || @review.customer == current_customer %>
+          <div class="col-md-3 offset-md-7">
+            <%= link_to edit_review_path(@review), class: "btn btn-success" do %>
+              <i class="fas fa-edit"></i> レビューを編集
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

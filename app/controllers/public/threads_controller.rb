@@ -1,6 +1,6 @@
 class Public::ThreadsController < ApplicationController
   def index
-    @thread = ThreadBoard.where(game_id: params[:id])
+    @thread = ThreadBoard.where(game_id: params[:game_id])
   end
 
   def show
@@ -9,7 +9,7 @@ class Public::ThreadsController < ApplicationController
 
   def new
     @thread = ThreadBoard.new
-    @game_id = params[:id]
+    @game_id = params[:game_id]
   end
 
   def create

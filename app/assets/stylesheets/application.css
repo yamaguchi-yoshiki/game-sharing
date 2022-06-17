@@ -37,3 +37,10 @@ main {
 .game_image {
   object-fit: contain;
 }
+
+.table_nowrap {
+  width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
