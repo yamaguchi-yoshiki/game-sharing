@@ -1,12 +1,18 @@
 class Public::GamesController < ApplicationController
   def index
     @games = Game.latest.page(params[:page])
+    @platforms = Platform.all
+    @tags = Tag.all
   end
 
   def show
     @game = Game.find(params[:id])
-    @reviews = @game.reviews.where.not(customer_id: current_customer.id).where(is_public: true)
-    @review = @game.reviews.find_by(customer_id: current_customer.id)
+    if customer_signed_in?
+      @reviews = @game.reviews.where.not(customer_id: current_customer.id).where(is_public: true)
+      @review = @game.reviews.find_by(customer_id: current_customer.id)
+    else
+      @reviews = @game.reviews.where(is_public: true)
+    end
     @thread_messages_count = 0
     @game.thread_boards.each do |thread|
       @thread_messages_count += thread.thread_messages.size
@@ -51,6 +57,27 @@ class Public::GamesController < ApplicationController
     @game.destroy
     flash[:alert] = '選択したゲームを削除しました'
     redirect_to games_path
+  end
+
+  def search
+    @platforms = Platform.all
+    @tags = Tag.all
+    if params[:word]
+      @word = params[:word]
+      @total_games = Game.where("title LIKE?","%#{@word}%")
+      @games = @total_games.latest.page(params[:page])
+    elsif params[:type] == "platform"
+      @word = params[:commit]
+      @platform = Platform.find_by(name: @word)
+      @total_games = Game.where(platform_id: @platform.id)
+      @games = @total_games.latest.page(params[:page])
+    elsif params[:type] == "tag"
+      @word = params[:commit]
+      @tag = Tag.find_by(name: @word)
+      @total_games = @tag.games
+      @games = @total_games.latest.page(params[:page])
+    end
+    render "index"
   end
 
   private

@@ -38,9 +38,10 @@ main {
   object-fit: contain;
 }
 
-.table_nowrap {
-  width: 45%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.ranking_bg {
+  background-color: #dc143c;
+}
+
+.new_bg {
+  background-color: #191970;
 }

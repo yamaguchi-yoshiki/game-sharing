@@ -36,12 +36,14 @@ Rails.application.routes.draw do
       resources :thread_messages, only: [:index]
     end
     # ゲーム関連
+    get "games/search"=>"games#search"
     resources :games do
       resources :reviews, only: [:new]
       resources :threads, only: [:index, :new]
     end
     # 機種ごとのゲーム一覧ページ
-    resources :platforms, only: [:index, :show]
+    get "rankings/search"=>"ranking#search"
+    resources :rankings, only: [:index]
     # レビュー関連
     resources :reviews, only: [:show, :create, :edit, :update, :destroy] do
       resource :sympathies, only: [:create, :destroy]

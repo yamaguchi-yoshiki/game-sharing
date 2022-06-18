@@ -74,6 +74,16 @@
               <% end %>
             </li>
             <li>
+              <%= link_to platforms_path, class: 'ml-4 text-light btn btn-outline-light' do %>
+                <i class="fas fa-crown"></i><span> ランキング</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to games_path, class: 'ml-4 text-light btn btn-outline-light' do %>
+                <i class="fas fa-gamepad"></i><span> ゲーム一覧</span>
+              <% end %>
+            </li>
+            <li>
               <%= link_to new_customer_registration_path, class: 'ml-4 text-light btn btn-outline-light' do %>
                 <i class="fas fa-user-plus"></i><span> 新規登録</span>
               <% end %>

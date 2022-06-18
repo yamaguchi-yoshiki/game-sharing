@@ -3,9 +3,9 @@
   <div class="row">
     <div class="offset-md-1 my-2">
       <% if @word == nil %>
-        <h4 class="title">ゲーム一覧<small>(新着順)</small></h4>
+        <h4 class="title">ゲーム一覧<small>(評価順)</small></h4>
       <% else %>
-        <h4 class="title">検索結果:"<%= @word %>"<small>(新着順,全<%= @total_games.size %>件)</small></h4>
+        <h4 class="title">検索結果:"<%= @word %>"<small>(評価順,全<%= @total_games.size %>件)</small></h4>
       <% end %>
     </div>
     <div class="ml-auto">
@@ -14,7 +14,7 @@
   </div>
   <div class="row">
     <div class="col-md-3 border rounded">
-      <%= render "public/games/side_bar", tags: @tags, link: games_search_path, sub_title: "新着順" %>
+      <%= render "public/games/side_bar", tags: @tags, link: rankings_search_path, sub_title: "評価順" %>
     </div>
     <div class="col-md-9">
       <%= render "index", games: @games %>

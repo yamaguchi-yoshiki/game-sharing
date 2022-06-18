@@ -1,0 +1,48 @@
+<div class="row mt-2 ranking_bg text-white">
+  <div class="col-md-12">
+    <span>ランキング</span>
+  </div>
+  <div class="col-md-12">
+    <%= form_with url: rankings_search_path, local: true, method: :get do |f| %>
+      <%= f.hidden_field :type, :value => "platform" %>
+      <table class="table table-sm table-borderless table-responsive">
+        <tbody>
+          <tr>
+            <td class="text-nowrap">
+              <%= link_to "全て", rankings_path, class: "btn btn-sm btn-block btn-secondary" %>
+            </td>
+            <% platforms.each do |platform| %>
+              <td>
+                <%= f.submit "#{platform.name}", class: "btn btn-sm btn-info" %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+<div class="row mb-2 new_bg text-white">
+  <div class="col-md-12">
+    <span>新着順</span>
+  </div>
+  <div class="col-md-12">
+    <%= form_with url: games_search_path, local: true, method: :get do |f| %>
+      <%= f.hidden_field :type, :value => "platform" %>
+      <table class="table table-sm table-borderless table-responsive">
+        <tbody>
+          <tr>
+            <td class="text-nowrap">
+              <%= link_to "全て", games_path, class: "btn btn-sm btn-secondary" %>
+            </td>
+            <% platforms.each do |platform| %>
+              <td>
+                <%= f.submit "#{platform.name}", class: "btn btn-sm btn-info" %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
