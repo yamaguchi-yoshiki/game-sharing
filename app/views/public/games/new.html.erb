@@ -7,49 +7,7 @@
   <div class="row mt-2">
     <div class="col-md-6 mx-auto">
   	  <%= render 'layouts/errors', obj: @game %>
-  	  <%= form_with model: @game, url: games_path do |f| %>
-      <table class="table table-borderless">
-          <tr>
-            <td style="width: 30%"><%= f.label :image, "ゲーム画像" %></td>
-            <td><%= f.file_field :game_image, class: "form-control-file", accept: 'image/*' %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :title, "タイトル" %></td>
-            <td><%= f.text_field :title, class: "form-control", size: "40" %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :platform_id, "機種" %></td>
-            <td>
-              <%= f.select :platform_id, options_from_collection_for_select(Platform.all, :id, :name), {}, class: "form-control" %>
-            </td>
-          </tr>
-          <tr>
-            <td class="align-middle"><%= f.label :introduction, "ゲーム紹介欄" %></td>
-            <td><%= f.text_area :introduction, rows: '5', class: "form-control" %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :release_date, "発売日" %></td>
-            <td>
-              <%= f.date_field :release_date, class: "form-control" %>
-            </td>
-          </tr>
-          <tr>
-            <td><%= f.label :no_tax_price, "税抜価格" %></td>
-            <td>
-              <%= f.text_field :no_tax_price, class: 'form-control', size: "20" %> 円
-            </td>
-          </tr>
-          <tr>
-            <td><%= f.label :related_url, "関連URL" %></td>
-            <td>
-              <%= f.text_field :related_url, class: "form-control" %>
-            </td>
-          </tr>
-      </table>
-      <div class="mx-auto">
-        <%= f.submit "新規登録", class: 'btn btn-success' %>
-      </div>
-      <% end %>
+  	  <%= render 'form', game: @game, btn_text: "新規登録" %>
     </div>
   </div>
 </div>

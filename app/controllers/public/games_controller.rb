@@ -7,9 +7,12 @@ class Public::GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @tags = @game.tags.pluck(:name).join(',')
     if customer_signed_in?
       @reviews = @game.reviews.where.not(customer_id: current_customer.id).where(is_public: true)
       @review = @game.reviews.find_by(customer_id: current_customer.id)
+    elsif admin_signed_in?
+      @reviews = @game.reviews
     else
       @reviews = @game.reviews.where(is_public: true)
     end
@@ -17,7 +20,6 @@ class Public::GamesController < ApplicationController
     @game.thread_boards.each do |thread|
       @thread_messages_count += thread.thread_messages.size
     end
-    @tags = @game.tags
   end
 
   def new
@@ -26,6 +28,23 @@ class Public::GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    # タグの保存、紐付け
+    @tags = params[:game][:name].delete(' ').delete('　').split(',').uniq
+    @tags.each do |tag|
+      old_tag = Tag.find_by(name: tag)
+      if old_tag == nil
+        new_tag = Tag.new(name: tag)
+        if new_tag.valid?
+          new_tag.save
+          @game.tags << new_tag
+        else
+          render "new"
+        end
+      else
+        @game.tags << old_tag
+      end
+    end
+    # 投稿の保存
     if @game.save
       thread_board = @game.thread_boards.new
       thread_board.title = "雑談(自動生成)"
@@ -41,10 +60,29 @@ class Public::GamesController < ApplicationController
 
   def edit
     @game = Game.find(params[:id])
+    @tags = @game.tags.pluck(:name).join(',')
   end
 
   def update
     @game = Game.find(params[:id])
+    # タグの保存、紐付け
+    @game.game_tags.destroy_all
+    @tags = params[:game][:name].delete(' ').delete('　').split(',').uniq
+    @tags.each do |tag|
+      old_tag = Tag.find_by(name: tag)
+      if old_tag == nil
+        new_tag = Tag.new(name: tag)
+        if new_tag.valid?
+          new_tag.save
+          @game.tags << new_tag
+        else
+          render "new"
+        end
+      else
+        @game.tags << old_tag
+      end
+    end
+    # 投稿の更新
     if @game.update(game_params)
       redirect_to game_path(@game), notice: "ゲーム情報を更新しました"
     else
