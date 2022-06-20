@@ -1,6 +1,7 @@
 class Public::RankingsController < ApplicationController
   def index
-    @games = Game.order(reviews.average(:rate)).page(params[:page])
+    sort_games = Game.all.sort { |a, b| b.reviews.average(:rate).to_f <=> a.reviews.average(:rate).to_f }
+    @games = Kaminari.paginate_array(sort_games).page(params[:page])
     @platforms = Platform.all
     @tags = Tag.all
   end
@@ -11,17 +12,20 @@ class Public::RankingsController < ApplicationController
     if params[:word]
       @word = params[:word]
       @total_games = Game.where("title LIKE?","%#{@word}%")
-      @games = @total_games.latest.page(params[:page])
+      sort_games = @total_games.sort { |a, b| b.reviews.average(:rate).to_f <=> a.reviews.average(:rate).to_f }
+      @games = Kaminari.paginate_array(sort_games).page(params[:page])
     elsif params[:type] == "platform"
       @word = params[:commit]
       @platform = Platform.find_by(name: @word)
       @total_games = Game.where(platform_id: @platform.id)
-      @games = @total_games.latest.page(params[:page])
+      sort_games = @total_games.sort { |a, b| b.reviews.average(:rate).to_f <=> a.reviews.average(:rate).to_f }
+      @games = Kaminari.paginate_array(sort_games).page(params[:page])
     elsif params[:type] == "tag"
       @word = params[:commit]
       @tag = Tag.find_by(name: @word)
       @total_games = @tag.games
-      @games = @total_games.latest.page(params[:page])
+      sort_games = @total_games.sort { |a, b| b.reviews.average(:rate).to_f <=> a.reviews.average(:rate).to_f }
+      @games = Kaminari.paginate_array(sort_games).page(params[:page])
     end
     render "index"
   end

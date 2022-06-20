@@ -8,7 +8,7 @@
       <h2><%= @game.title %></h2>
     </div>
   </div>
-  <div class="row mb-5">
+  <div class="row my-4">
     <div class="col-md-3">
       <h4>平均評価</h4>
       <div class="col-md-9">
@@ -66,7 +66,7 @@
     <% end %>
     <% if admin_signed_in? %>
       <div class="col-2">
-        <%= link_to game_path(@game), class: "btn btn-danger", data: {confirm: "このゲームに関連付けられたレビュー、スレッドが全て削除されます。本当に消しますか?" } do %>
+        <%= link_to game_path(@game), class: "btn btn-danger", data: {confirm: "このゲームに関連付けられたレビュー、スレッドが全て削除されます。本当に消しますか?" }, method: :delete do %>
           <i class="far fa-trash-alt"></i> 情報を削除する
         <% end %>
       </div>
@@ -81,15 +81,17 @@
           <h6>まだレビューがありません 以下のボタンからレビューを作成しましょう</h6>
           <%= link_to "レビューを書く", new_game_review_path(@game), class: "btn btn-primary" %>
         <% else %>
-          <div class="row">
-            <div class="col-md-7"><%= @review.customer.name %></div>
-            <div class="col-md-2">
-              <span id="star-review-<%= @review.id %>"></span>
-              <%= render "public/shared/star", review: @review, game: nil %>
+          <%= link_to review_path(@review), class: "text-dark text-decoration-none" do %>
+            <div class="row my-2 border border-secondary rounded">
+              <div class="col-md-7 my-auto"><strong><u><%= @review.customer.name %></u></strong></div>
+              <div class="col-md-2">
+                <span id="star-review-<%= @review.id %>"></span>
+                <%= render "public/shared/star", review: @review, game: nil %>
+              </div>
+              <div class="col-md-3 my-auto">評価:<%= @review.rate %></div>
+              <div class="col-md-12 py-2 border-top"><%= @review.comment %></div>
             </div>
-            <div class="col-md-3">評価:<%= @review.rate %></div>
-            <div class="col-md-12 border-bottom"><%= @review.comment %></div>
-          </div>
+          <% end %>
         <% end %>
       <% elsif admin_signed_in? %>
       <% else %>
@@ -97,15 +99,17 @@
       <% end %>
       <h5>みんなのレビュー</h5>
       <% @reviews.each do |review| %>
-        <div class="row">
-          <div class="col-md-7"><%= review.customer.name %></div>
-          <div class="col-md-2">
-            <span id="star-review-<%= review.id %>"></span>
-            <%= render "public/shared/star", review: review, game: nil %>
+        <%= link_to review_path(review), class: "text-dark text-decoration-none bg-primary" do %>
+          <div class="row mt-2 border border-secondary rounded">
+            <div class="col-md-7 my-auto"><strong><u><%= review.customer.name %></u></strong></div>
+            <div class="col-md-2">
+              <span id="star-review-<%= review.id %>"></span>
+              <%= render "public/shared/star", review: review, game: nil %>
+            </div>
+            <div class="col-md-3 my-auto">評価:<%= review.rate %></div>
+            <div class="col-md-12 py-2 border-top"><%= review.comment %></div>
           </div>
-          <div class="col-md-3">評価:<%= review.rate %></div>
-          <div class="col-md-12 border-bottom"><%= review.comment %></div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       resources :threads, only: [:index, :new]
     end
     # 機種ごとのゲーム一覧ページ
-    get "rankings/search"=>"ranking#search"
+    get "rankings/search"=>"rankings#search"
     resources :rankings, only: [:index]
     # レビュー関連
     resources :reviews, only: [:show, :create, :edit, :update, :destroy] do

@@ -29,7 +29,7 @@
           </tr>
           <tr>
             <td><%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %></td>
-            <td><%= f.text_area :name, class: "form-control" %></td>
+            <td><%= f.text_area :name, value: @tags, class: "form-control" %></td>
           </tr>
           <tr>
             <td class="align-middle"><%= f.label :introduction, "ゲーム紹介欄" %></td>

@@ -1,11 +1,11 @@
 class Public::ThreadMessagesController < ApplicationController
   def index
-    @thread_messages = ThreadMessage.where(customer_id: params[:customer_id])
+    @messages = ThreadMessage.where(customer_id: params[:customer_id])
   end
 
   def create
-    @thread_message = ThreadMessage.new(thread_message_params)
-    if @thread_message.save
+    @tmessage = current_customer.thread_messages.new(thread_message_params)
+    if @message.save
       flash[:notice] = "メッセージを投稿しました"
     else
     end
@@ -13,9 +13,15 @@ class Public::ThreadMessagesController < ApplicationController
   end
 
   def destroy
-    @thread_message = ThreadMessage.find(params[:id])
-    @thread_message.destroy
+    @message = ThreadMessage.find(params[:id])
+    @message.destroy
     flash[:alert] = 'メッセージを削除しました'
     redirect_to thread_path(params[:thread_id])
+  end
+
+  private
+
+  def thread_message_params
+    params.require(:thread_message).permit(:thread_id, :message)
   end
 end

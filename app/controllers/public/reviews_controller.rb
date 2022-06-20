@@ -6,6 +6,8 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    @comment = ReviewComment.new
+    @comments = @review.review_comments
   end
 
   def new
@@ -39,7 +41,7 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @game = Game.find(@review.game_id)
     @review.destroy
-    flash[:alert] = '選択したレビューを削除しました'
+    flash[:alert] = 'レビューを削除しました'
     redirect_to game_path(@game)
   end
 

@@ -13,11 +13,11 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3 border rounded">
+    <div class="col-md-3">
       <%= render "public/games/side_bar", tags: @tags, link: rankings_search_path, sub_title: "評価順" %>
     </div>
     <div class="col-md-9">
-      <%= render "index", games: @games %>
+      <%= render "public/games/index", games: @games %>
     </div>
   </div>
 </div>
