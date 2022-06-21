@@ -1,0 +1,8 @@
+<% platforms.each do |platform| %>
+  <tr>
+    <td class="align-middle text-center"><h5><%= platform.name %></h5></td>
+    <td class="align-middle text-center">
+      <%= link_to "編集する", edit_admin_platform_path(platform), class: "btn btn-success" %>
+    </td>
+  </tr>
+<% end %>

@@ -1,0 +1,13 @@
+<div class='container'>
+  <div class="row">
+    <div class="offset-md-1 my-2">
+      <h4 class="title">ゲーム新規登録</h4>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-6 mx-auto">
+  	  <%= render 'layouts/errors', obj: @game %>
+  	  <%= render 'form', game: @game, btn_text: "新規登録" %>
+    </div>
+  </div>
+</div>

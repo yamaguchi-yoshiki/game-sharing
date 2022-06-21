@@ -1,0 +1,26 @@
+<div class="border rounded">
+  <div class="border-bottom text-center mt-2">
+    <h5>検索バー(<%= sub_title %>)</h5>
+  </div>
+
+  <%= form_with url: link, method: :get do |f| %>
+  <div class="border-bottom">
+    <div class="row mx-auto py-2">
+      <div class="ml-3">
+        <%= f.text_field :word, placeholder: "タイトルを検索...", class: "form-control form-control-sm" %>
+      </div>
+      <div>
+        <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
+      </div>
+    </div>
+    </div>
+  <% end %>
+  <div class="text-center"><span>タグ検索</span></div>
+
+  <%= form_with url: link, method: :get do |f| %>
+    <%= f.hidden_field :type, :value => "tag" %>
+    <% @tags.each do |tag| %>
+      <div class="border-top align-middle"><%= f.submit "#{tag.name}", class: "btn btn-link" %></div>
+    <% end %>
+  <% end %>
+</div>

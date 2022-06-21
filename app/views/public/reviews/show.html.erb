@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 border rounded">
+      <div class="row border-bottom">
+        <div class="col-md-4 my-auto"><%= @review.customer.name %></div>
+        <div class="col-md-5 text-right my-auto"><%= @review.game.title %></div>
+        <div class="col-md-2"><span id="star-review-<%= @review.id %>"></span></div>
+        <%= render "public/shared/star", review: @review, game: nil %>
+        <div class="col-md-1 my-auto">評価:<%= @review.rate %></div>
+      </div>
+      <div class="row py-2">
+        <div class="col-md-12"><%= @review.comment %></div>
+      </div>
+      <div class="row py-2 border-top">
+        <div class="col-md-2 my-auto">
+          <i class="fas fa-comment"></i> <%= @review.review_comments.size %>
+        </div>
+        <% if admin_signed_in? || @review.customer == current_customer %>
+          <div class="col-md-3 offset-md-4">
+            <%= link_to edit_review_path(@review), class: "btn btn-success" do %>
+              <i class="fas fa-edit"></i> レビューを編集
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <%= link_to review_path(@review), class: "btn btn-danger", data: {confirm: "本当に消しますか？" }, method: :delete do %>
+              <i class="far fa-trash-alt"></i> レビューを削除
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-12 mt-2">
+      <h3>コメント一覧</h3>
+    </div>
+    <% @comments.each do |comment| %>
+      <div class="col-12 my-2 border border-secondary rounded">
+        <div class="row my-2">
+          <div class="col-md-6 my-auto">
+            <strong><%= comment.customer.name %></strong>
+            <span class="text-muted"> 投稿時間:<%= comment.created_at.strftime("%Y年%-m月%-d日 %H:%M:%S") %></span>
+          </div>
+          <% if admin_signed_in? || comment.customer == current_customer %>
+            <div class="col-md-2 ml-auto">
+              <%= link_to "削除", review_review_comment_path(@review.id, comment.id), class: "btn btn-danger", data: {confirm: "本当に消しますか？" }, method: :delete %>
+            </div>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col-md-12 py-2 border-top"><%= comment.comment %></div>
+        </div>
+      </div>
+    <% end %>
+    <% if customer_signed_in? %>
+      <div class="col-12">
+        <h4><%= current_customer.name %> としてコメントをする</h4>
+        <%= form_with model: @comment, url: review_review_comments_path(@review.id), method: :post do |f| %>
+          <%= f.label :comment, "コメント" %>
+          <%= f.text_area :comment, class: "form-control" %>
+          <%= f.hidden_field :review_id, value: @review.id %>
+          <div class="mt-2"><%= f.submit "投稿", class: "btn btn-success" %></div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

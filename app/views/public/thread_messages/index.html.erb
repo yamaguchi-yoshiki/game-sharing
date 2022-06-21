@@ -1,0 +1,35 @@
+<div class='container'>
+  <div class="row">
+    <div class="my-2">
+      <h4 class="title"><%= @customer.name %>のスレッドメッセージ一覧</h4>
+    </div>
+  </div>
+  <div class="row">
+    <% @messages.each do |message| %>
+      <div class="col-12 my-2 border border-secondary rounded">
+        <div class="row my-2">
+          <div class="col-md-6 my-auto">
+            <%= link_to thread_path(message.thread_board) do %>
+              <strong><u><%= message.thread_board.title %></u></strong>
+            <% end %>
+            <span><small>(<%= message.thread_board.game.title %>)</small></span>
+            <span class="text-muted"> 投稿時間:<%= message.created_at.strftime("%Y年%-m月%-d日 %H:%M:%S") %></span>
+          </div>
+          <% if admin_signed_in? || message.customer == current_customer %>
+            <div class="col-md-2 ml-auto">
+              <%= link_to "削除", thread_thread_message_path(message.thread_board, message), class: "btn btn-danger", data: {confirm: "本当に消しますか？" }, method: :delete %>
+            </div>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col-md-12 py-2 border-top"><%= message.message %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="mx-auto">
+      <%= paginate @messages %>
+    </div>
+  </div>
+</div>

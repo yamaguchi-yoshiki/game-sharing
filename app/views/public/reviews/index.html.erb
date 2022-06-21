@@ -1,0 +1,67 @@
+<div class='container'>
+  <div class="row">
+    <div class="my-2">
+      <h4 class="title"><%= @customer.name %>のレビュー一覧</h4>
+    </div>
+  </div>
+  <div id="reviews_index">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th style='width: 20%'>ゲームタイトル</th>
+          <th style='width: 10%'>評価</th>
+          <th style='width: 45%'>レビュー</th>
+          <% if admin_signed_in? || @customer == current_customer %>
+            <th style='width: 10%'>公開状況</th>
+          <% end %>
+          <th style='width: 15%'>詳細ボタン</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if admin_signed_in? || @customer == current_customer %>
+          <% @reviews.each do |review| %>
+            <tr>
+
+              <td class="text-trancated"><%= review.game.title %></td>
+              <td>
+                <%= image_tag "star-on.png", size: "25x25" %>
+                x <%= review.rate %>
+              </td>
+              <td><%= review.comment %></td>
+              <% if review.is_public == true %>
+                <td class="text-success">公開</td>
+              <% else %>
+                <td class="text-muted">非公開</td>
+              <% end %>
+              <td><%= link_to "詳細を見る", review_path(review), class: "btn btn-success btn-block" %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <% @reviews.each do |review| %>
+            <% if review.is_public == true %>
+
+              <tr>
+                <td class="text-trancated"><%= review.game.title %></td>
+                <td>
+                  <%= image_tag "star-on.png", size: "25x25" %>
+                  x <%= review.rate %>
+                </td>
+                <td class="text-trancated"><%= review.comment %></td>
+                <td><%= link_to "詳細を見る", review_path(review), class: "btn btn-success btn-block" %></td>
+              </tr>
+            <% else %>
+              <tr>
+                <td colspan="4">非公開のレビューです。</td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="mx-auto">
+        <%= paginate @reviews %>
+      </div>
+    </div>
+  </div>
+</div>
