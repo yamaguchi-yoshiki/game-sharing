@@ -54,7 +54,7 @@
       <%= link_to game_threads_path(@game), class: "btn btn-primary" do %>
         <i class="fas fa-clipboard-list"></i>
         <span> スレッド一覧 </span>
-        <span class="badge badge-light"><%= @thread_messages_count %></span>
+        <span class="badge badge-light"><%= @game.thread_boards.size %></span>
       <% end %>
     </div>
     <% if admin_signed_in? || customer_signed_in? && current_customer.email != "guest@example.com" %>

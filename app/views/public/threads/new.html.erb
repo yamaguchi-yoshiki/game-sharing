@@ -1,2 +1,14 @@
-<h1>Public::Threads#new</h1>
-<p>Find me in app/views/public/threads/new.html.erb</p>
+<div class='container'>
+  <div class="row">
+    <div class="offset-md-1 my-2">
+      <h4 class="title">スレッド新規登録</h4>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-6 mx-auto">
+  	  <%= render 'layouts/errors', obj: @thread %>
+  	  <h5><strong><%= @game.title %></strong>のスレッドを作成する</h5>
+  	  <%= render 'form', thread: @thread, game: @game %>
+    </div>
+  </div>
+</div>

@@ -7,7 +7,7 @@
   <div class="row mt-2">
     <div class="col-md-6 mx-auto">
   	  <%= render 'layouts/errors', obj: @review %>
-  	  <h5><%= @game.title %>のレビューを作成する</h5>
+  	  <h5><strong><%= @game.title %></strong>のレビューを作成する</h5>
   	  <%= form_with model: @review, url: reviews_path do |f| %>
       <table class="table table-borderless">
           <tr>

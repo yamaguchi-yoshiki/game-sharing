@@ -26,6 +26,7 @@ class Public::ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
+    @game = Game.find(@review.game_id)
   end
 
   def update

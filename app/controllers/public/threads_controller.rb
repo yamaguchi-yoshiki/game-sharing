@@ -1,15 +1,19 @@
 class Public::ThreadsController < ApplicationController
   def index
-    @thread = ThreadBoard.where(game_id: params[:game_id])
+    @game = Game.find(params[:game_id])
+    @threads = @game.thread_boards
   end
 
   def show
     @thread = ThreadBoard.find(params[:id])
+    @game = @thread.game
+    @message = ThreadMessage.new
+    @messages = @thread.thread_messages.page(params[:page])
   end
 
   def new
+    @game = Game.find(params[:game_id])
     @thread = ThreadBoard.new
-    @game_id = params[:game_id]
   end
 
   def create
@@ -17,6 +21,7 @@ class Public::ThreadsController < ApplicationController
     if @thread.save
       redirect_to thread_path(@thread), notice: "スレッドを追加しました"
     else
+      @game = Game.find(@thread.game_id)
       render "new"
     end
   end

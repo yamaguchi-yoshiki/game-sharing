@@ -16,10 +16,6 @@ class Public::GamesController < ApplicationController
     else
       @reviews = @game.reviews.where(is_public: true)
     end
-    @thread_messages_count = 0
-    @game.thread_boards.each do |thread|
-      @thread_messages_count += thread.thread_messages.size
-    end
   end
 
   def new
