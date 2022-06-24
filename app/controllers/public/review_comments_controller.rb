@@ -1,4 +1,7 @@
 class Public::ReviewCommentsController < ApplicationController
+  before_action :authenticate_admin_customer, only: [:destroy]
+  before_action :authenticate_customer!, only: [:create]
+
   def create
     @comment = current_customer.review_comments.new(review_comment_params)
     if @comment.save

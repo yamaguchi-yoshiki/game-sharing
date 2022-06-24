@@ -1,4 +1,8 @@
 class Public::ReviewsController < ApplicationController
+  before_action :authenticate_admin_customer, only: [:edit, :update]
+  before_action :authenticate_customer!, only: [:new, :create]
+  before_action :authenticate_admin!, only: [:destroy]
+
   def index
     @customer = Customer.find(params[:customer_id])
     @reviews = Review.where(customer_id: @customer.id).latest.page(params[:page])

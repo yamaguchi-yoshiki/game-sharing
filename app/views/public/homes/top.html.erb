@@ -7,25 +7,88 @@
         会員でない方もレビューの閲覧はできますが、</br>
         投稿には会員登録が必要になります。
       </h2>
-      <div class="col-10 mx-auto">
-        <div class="row my-4">
-          <%= link_to 'ゲストログイン(テスト投稿用)', users_guest_sign_in_path, class: "btn btn-sm btn-secondary btn-block", method: :post %>
+      <% unless admin_signed_in? || customer_signed_in? %>
+        <div class="col-10 mx-auto">
+          <div class="row my-4">
+            <%= link_to 'ゲストログイン(テスト投稿用)', users_guest_sign_in_path, class: "btn btn-sm btn-secondary btn-block", method: :post %>
+          </div>
+          <div class="row my-4">
+            <%= link_to 'ログイン', new_customer_session_path, class: "btn btn-sm btn-info btn-block" %>
+          </div>
+          <div class="row my-4">
+            <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-sm btn-success btn-block" %>
+          </div>
         </div>
-        <div class="row my-4">
-          <%= link_to 'ログイン', new_customer_session_path, class: "btn btn-sm btn-info btn-block" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container mt-4">
+  <div class="row">
+    <div>
+      <h2 class="title">評価ランキング</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 mt-2 mx-auto">
+      <% @rank_games.each.with_index(1) do |rank_game, i| %>
+        <div class="row border py-2">
+          <div class="col-md-1 my-auto">第<%= i %>位</div>
+          <div class="col-md-2">
+            <%= link_to game_path(rank_game) do %>
+              <%= image_tag rank_game.get_game_image, size:'100x100', class: "game_image" %>
+            <% end %>
+          </div>
+          <div class="col-md-7">
+            <%= link_to game_path(rank_game) do %>
+              <p><%= rank_game.title %></p>
+            <% end %>
+            <p class="text-muted">発売日:<%= rank_game.release_date %></p>
+          </div>
+          <div class="col-md-2 text-center">
+            <p>平均評価:</p>
+            <p><%= rank_game.reviews.average(:rate).to_f.round(1) %> <small>/10</small></p>
+          </div>
         </div>
-        <div class="row my-4">
-          <%= link_to '新規登録', new_customer_registration_path, class: "btn btn-sm btn-success btn-block" %>
+      <% end %>
+      <div class="row">
+        <div class="ml-auto">
+          <%= link_to "全て見る ≫", rankings_path %>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container">
   <div class="row">
-    <%= link_to "全てのランキングを見る ", rankings_path %>
+    <div>
+      <h2 class="title">新着のゲーム</h2>
+    </div>
   </div>
   <div class="row">
-    <%= link_to "全ての新着順を見る ", games_path %>
+    <div class="col-md-10 mt-2 mx-auto">
+      <% @games.each do |game| %>
+        <div class="row border py-2">
+          <div class="col-md-2 offset-md-1">
+            <%= link_to game_path(game) do %>
+              <%= image_tag game.get_game_image, size:'100x100', class: "game_image" %>
+            <% end %>
+          </div>
+          <div class="col-md-7">
+            <%= link_to game_path(game) do %>
+              <p><%= game.title %></p>
+            <% end %>
+            <p class="text-muted">発売日:<%= game.release_date %></p>
+          </div>
+          <div class="col-md-2 text-center">
+            <p>平均評価:</p>
+            <p><%= game.reviews.average(:rate).to_f.round(1) %> <small>/10</small></p>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div class="ml-auto">
+          <%= link_to "全て見る ≫", games_path %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
