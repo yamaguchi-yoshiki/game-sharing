@@ -19,11 +19,11 @@
       <p>レビュー数: <%= @game.reviews.size %>件</p>
       <p>平均評価: <strong><%= @game.reviews.average(:rate).to_f.round(1) %></strong>/10</p>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <h4>ゲーム概要</h4></h4>
       <span><%= @game.introduction %></span>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <h4>infomation</h4>
       <table class="table table-sm table-borderless">
         <tbody>
@@ -95,7 +95,7 @@
         <% end %>
       <% elsif admin_signed_in? %>
       <% else %>
-        <h5>ログインまたは新規登録してレビューを投稿しましょう</h5>
+        <h5><u>ログインまたは新規登録してレビューを投稿しましょう</u></h5>
       <% end %>
       <h5>みんなのレビュー</h5>
       <% @reviews.each do |review| %>

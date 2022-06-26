@@ -1,4 +1,4 @@
-class Admin::HomesController < ApplicationController
+class Admin::HomesController < Admin::ApplicationController
   def top
     @customers = Customer.page(params[:page])
   end

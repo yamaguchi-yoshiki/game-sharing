@@ -1,4 +1,5 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticate_admin_customer, only: [:edit, :update, :quit_check, :withdraw]
   before_action :ensure_guest_customer, only: [:edit, :update]
 
   def show

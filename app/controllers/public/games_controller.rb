@@ -1,4 +1,8 @@
 class Public::GamesController < ApplicationController
+  before_action :authenticate_admin_customer, only: [:new, :create, :edit, :update]
+  before_action :authenticate_admin!, only: [:destroy]
+  before_action :ensure_guest_customer, only: [:new, :create, :edit, :update]
+
   def index
     @games = Game.latest.page(params[:page])
     @platforms = Platform.all
@@ -125,5 +129,14 @@ class Public::GamesController < ApplicationController
       :no_tax_price,
       :related_url
     )
+  end
+
+  def ensure_guest_customer
+    if customer_signed_in?
+      @customer = current_customer
+      if @customer.email == "guest@example.com"
+        redirect_to customer_path(@customer) , notice: 'ゲストユーザーはゲームを追加、編集できません。'
+      end
+    end
   end
 end

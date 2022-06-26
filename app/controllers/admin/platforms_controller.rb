@@ -1,4 +1,4 @@
-class Admin::PlatformsController < ApplicationController
+class Admin::PlatformsController < Admin::ApplicationController
   def index
     @platforms = Platform.all
     @platform = Platform.new

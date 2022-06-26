@@ -1,4 +1,7 @@
 class Public::ThreadMessagesController < ApplicationController
+  before_action :authenticate_admin_customer, only: [:destroy]
+  before_action :authenticate_customer!, only: [:create]
+
   def index
     @customer = Customer.find(params[:customer_id])
     @messages = @customer.thread_messages.page(params[:page])
