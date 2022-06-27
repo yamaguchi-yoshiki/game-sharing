@@ -12,16 +12,18 @@
         <div class="col-md-12"><%= @review.comment %></div>
       </div>
       <div class="row py-2 border-top">
-        <div class="col-md-2 my-auto">
+        <div class="col my-auto">
           <i class="fas fa-comment"></i> <%= @review.review_comments.size %>
         </div>
         <% if admin_signed_in? || @review.customer == current_customer %>
-          <div class="col-md-3 offset-md-4">
+          <div class="col-3">
             <%= link_to edit_review_path(@review), class: "btn btn-success" do %>
               <i class="fas fa-edit"></i> レビューを編集
             <% end %>
           </div>
-          <div class="col-md-3">
+        <% end %>
+        <% if admin_signed_in? %>
+          <div class="col-3">
             <%= link_to review_path(@review), class: "btn btn-danger", data: {confirm: "本当に消しますか？" }, method: :delete do %>
               <i class="far fa-trash-alt"></i> レビューを削除
             <% end %>
