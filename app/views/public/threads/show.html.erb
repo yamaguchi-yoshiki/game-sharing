@@ -41,7 +41,7 @@
   <div class="row">
     <% if customer_signed_in? %>
       <div class="col-md-6 mx-auto">
-        <h6><%= current_customer.name %> として投稿をする</h6>
+        <h6><strong><%= current_customer.name %></strong> として投稿をする</h6>
         <%= form_with model: [@thread, @message], url: thread_thread_messages_path(@thread), method: :post do |f| %>
           <%= f.label :message, "メッセージ" %>
           <%= f.text_area :message, class: "form-control" %>

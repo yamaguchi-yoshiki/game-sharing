@@ -11,10 +11,10 @@ class Public::ThreadMessagesController < ApplicationController
     @thread = ThreadBoard.find(params[:thread_id])
     @message = current_customer.thread_messages.new(thread_message_params)
     @message.thread_board_id = @thread.id
-    if @message.save!
+    if @message.save
       flash[:notice] = "メッセージを投稿しました"
     else
-      flash[:alert] = "error"
+      flash[:alert] = "メッセージを入力してください"
     end
     redirect_to thread_path(@thread)
   end
