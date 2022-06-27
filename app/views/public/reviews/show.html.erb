@@ -51,8 +51,8 @@
       </div>
     <% end %>
     <% if customer_signed_in? %>
-      <div class="col-12">
-        <h4><%= current_customer.name %> としてコメントをする</h4>
+      <div class="col-md-6 mx-auto">
+        <h6><strong><%= current_customer.name %></strong> としてコメントをする</h6>
         <%= form_with model: @comment, url: review_review_comments_path(@review.id), method: :post do |f| %>
           <%= f.label :comment, "コメント" %>
           <%= f.text_area :comment, class: "form-control" %>

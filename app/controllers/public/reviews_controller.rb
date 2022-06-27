@@ -24,13 +24,14 @@ class Public::ReviewsController < ApplicationController
     if @review.save
       redirect_to review_path(@review), notice: "レビューを投稿しました"
     else
+      @game = @review.game
       render "new"
     end
   end
 
   def edit
     @review = Review.find(params[:id])
-    @game = Game.find(@review.game_id)
+    @game = @review.game
   end
 
   def update
@@ -38,6 +39,7 @@ class Public::ReviewsController < ApplicationController
     if @review.update(review_params)
       redirect_to review_path(@review), notice: "レビューを更新しました"
     else
+      @game = @review.game
       render "edit"
     end
   end

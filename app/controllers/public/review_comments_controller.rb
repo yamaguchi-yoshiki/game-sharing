@@ -7,6 +7,7 @@ class Public::ReviewCommentsController < ApplicationController
     if @comment.save
       flash[:notice] = "コメントを投稿しました"
     else
+      flash[:alert] = "コメントを入力してください"
     end
     redirect_to review_path(params[:review_id])
   end
