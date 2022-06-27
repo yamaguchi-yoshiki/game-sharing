@@ -27,6 +27,7 @@
 - ゲームを買うか迷っている時
 
 ## 設計書(link)
+(一部の機能は未実装です。)
 - [実装機能リスト](https://docs.google.com/spreadsheets/d/10w0C5OcfYNOgSt37F0mMMv5TYYKT7cPAA_orx-sMg_k/edit?usp=sharing)
 - [ER図](https://drive.google.com/file/d/12x8Rf4UQU5r0xRJBC5R7t_chDb0oYzJ4/view?usp=sharing)
 - [テーブル定義書](https://docs.google.com/spreadsheets/d/1o1xHG_DKDuOhoySmL7GLulu3A80Kcc272avOaOGKO_0/edit?usp=sharing)
