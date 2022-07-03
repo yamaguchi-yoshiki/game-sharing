@@ -6,7 +6,7 @@
     </tr>
     <tr>
       <td><%= f.label :title, "タイトル" %></td>
-      <td><%= f.text_field :title, class: "form-control", size: "40" %></td>
+      <td><%= f.text_field :title, placeholder: "サンプルゲーム", class: "form-control", size: "40" %></td>
     </tr>
     <tr>
       <td><%= f.label :platform_id, "機種" %></td>
@@ -20,18 +20,18 @@
     </tr>
     <tr>
       <td><%= f.label :name, "タグ (,で区切ると複数タグ登録できます)" %></td>
-      <td><%= f.text_area :name, class: "form-control" %></td>
+      <td><%= f.text_area :name, placeholder: "アクション,アドベンチャー", class: "form-control" %></td>
     </tr>
     <tr>
       <td class="align-middle"><%= f.label :introduction, "ゲーム紹介欄" %></td>
-      <td><%= f.text_area :introduction, rows: '5', class: "form-control" %></td>
+      <td><%= f.text_area :introduction, rows: '5', placeholder: "紹介文を入力...", class: "form-control" %></td>
     </tr>
     <tr>
       <td><%= f.label :release_date, "発売日" %></td>
       <td>
         <div class="row">
           <div class="col-md-6">
-            <%= f.text_field :release_date, class: "form-control" %>
+            <%= f.text_field :release_date, placeholder: "XXXX年YY月ZZ日", class: "form-control" %>
           </div>
         </div>
       </td>
@@ -50,7 +50,7 @@
     <tr>
       <td><%= f.label :related_url, "関連URL" %></td>
       <td>
-        <%= f.text_field :related_url, class: "form-control" %>
+        <%= f.text_field :related_url, placeholder: "https://sample.example.com", class: "form-control" %>
       </td>
     </tr>
   </table>
