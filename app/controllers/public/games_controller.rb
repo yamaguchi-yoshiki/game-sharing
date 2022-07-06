@@ -127,7 +127,8 @@ class Public::GamesController < ApplicationController
       :introduction,
       :release_date,
       :no_tax_price,
-      :related_url
+      :related_url,
+      :game_image
     )
   end
 

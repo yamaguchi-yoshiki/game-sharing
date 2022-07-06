@@ -40,7 +40,7 @@
     <div class="offset-md-2">
       <h5 class="title">会員登録がお済みでない方</h5>
       <p class="ml-2"><%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。</p>
-      <p class="ml-2">または、<%= link_to "ゲスト", users_guest_sign_in_path %>としてログインする。</p>
+      <p class="ml-2">または、<%= link_to "ゲスト", users_guest_sign_in_path, method: :post %>としてログインする。</p>
     </div>
   </div>
 </div>
