@@ -31,6 +31,10 @@ class Public::ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
+    @customer = @review.customer
+    unless admin_signed_in? || @customer == current_customer
+      redirect_to root_path
+    end
     @game = @review.game
   end
 

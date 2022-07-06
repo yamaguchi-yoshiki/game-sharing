@@ -8,6 +8,9 @@ class Public::CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
+    unless admin_signed_in? || @customer == current_customer
+      redirect_to root_path
+    end
   end
 
   def update
