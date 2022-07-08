@@ -1,0 +1,13 @@
+<!-- レビュー評価表示用 -->
+<script type="text/javascript">
+  $('#star-review-<%= review.id %>').raty({
+    number: 10,
+    hints: [1,2,3,4,5,6,7,8,9,10],
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn: '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: false,
+    readOnly: true,
+    score: <%= review.rate %>
+  });
+</script>

@@ -19,7 +19,7 @@
             <td><%= f.text_area :comment, class: "form-control", size: "40" %></td>
           </tr>
       </table>
-      <%= render "public/shared/star", review: nil, game: nil %>
+      <%= render "public/shared/star_form", review: @review %>
       <div class="mx-auto">
         <%= f.submit "変更を保存", class: 'btn btn-success' %>
       </div>

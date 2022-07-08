@@ -7,7 +7,7 @@
   <div class="row mt-2">
     <div class="col-md-6 mx-auto">
   	  <%= render 'layouts/errors', obj: @review %>
-  	  <h5><strong><%= @game.title %></strong>のレビューを作成する</h5>
+  	  <h5><strong><%= @game.title %></strong>のレビュー</h5>
   	  <%= form_with model: @review, url: reviews_path do |f| %>
       <table class="table table-borderless">
           <tr>
@@ -19,7 +19,7 @@
             <td><%= f.text_area :comment, class: "form-control", size: "40" %></td>
           </tr>
       </table>
-      <%= render "public/shared/star", review: nil, game: nil %>
+      <%= render "public/shared/star_form", review: @review %>
       <div class="mx-auto">
         <%= f.hidden_field :game_id, :value => @game.id %>
         <%= f.hidden_field :is_public, :value => true %>

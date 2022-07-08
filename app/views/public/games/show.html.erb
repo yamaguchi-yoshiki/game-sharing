@@ -13,7 +13,7 @@
       <h4>平均評価</h4>
       <div class="col-md-9">
         <span id="star-game-<%= @game.id %>"></span>
-        <%= render "public/shared/star", review: nil, game: @game %>
+        <%= render "public/shared/star_rate", game: @game %>
       </div>
       <p></p>
       <p>レビュー数: <%= @game.reviews.size %>件</p>
@@ -86,7 +86,7 @@
               <div class="col-md-7 my-auto"><strong><u><%= @review.customer.name %></u></strong></div>
               <div class="col-md-2">
                 <span id="star-review-<%= @review.id %>"></span>
-                <%= render "public/shared/star", review: @review, game: nil %>
+                <%= render "public/shared/star_show", review: @review %>
               </div>
               <div class="col-md-3 my-auto">評価:<%= @review.rate %></div>
               <div class="col-md-12 py-2 border-top"><%= @review.comment %></div>
@@ -104,7 +104,7 @@
             <div class="col-md-7 my-auto"><strong><u><%= review.customer.name %></u></strong></div>
             <div class="col-md-2">
               <span id="star-review-<%= review.id %>"></span>
-              <%= render "public/shared/star", review: review, game: nil %>
+              <%= render "public/shared/star_show", review: review %>
             </div>
             <div class="col-md-3 my-auto">評価:<%= review.rate %></div>
             <div class="col-md-12 py-2 border-top"><%= review.comment %></div>
