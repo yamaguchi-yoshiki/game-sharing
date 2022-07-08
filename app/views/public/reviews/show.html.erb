@@ -5,7 +5,7 @@
         <div class="col-md-4 my-auto"><%= @review.customer.name %></div>
         <div class="col-md-5 text-right my-auto"><%= @review.game.title %></div>
         <div class="col-md-2"><span id="star-review-<%= @review.id %>"></span></div>
-        <%= render "public/shared/star", review: @review, game: nil %>
+        <%= render "public/shared/star_show", review: @review %>
         <div class="col-md-1 my-auto">評価:<%= @review.rate %></div>
       </div>
       <div class="row py-2">
