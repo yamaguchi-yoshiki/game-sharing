@@ -1,4 +1,4 @@
-# Game Review&Sharing Ver.1.3
+# Game Review&Sharing Ver.1.4
 
 ## サイト概要
 
@@ -62,3 +62,6 @@
 ### Ver.1.3
 - [Fix] レビュー編集ページで元々の評価値が入るように修正
 - [Fix] その他raty-js関連の修正
+
+### Ver.1.4
+- [Add] エラーメッセージの日本語化
