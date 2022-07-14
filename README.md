@@ -1,4 +1,4 @@
-# Game Review&Sharing Ver.1.4
+# Game Review&Sharing Ver.2.0
 
 ## サイト概要
 
