@@ -1,7 +1,10 @@
 class Public::RankingsController < ApplicationController
   def index
-    sort_games = Game.all.sort { |a, b| b.reviews.average(:rate).to_f <=> a.reviews.average(:rate).to_f }
-    @games = Kaminari.paginate_array(sort_games).page(params[:page])
+    # sort_games = Game.all.sort { |a, b| b.reviews.average(:rate).to_f <=> a.reviews.average(:rate).to_f }
+    # @games = Kaminari.paginate_array(sort_games).page(params[:page])
+    # 負荷軽減のため修正
+    @games = Game.left_joins(:reviews).group(:id).order('AVG(reviews.rate) desc').page(params[:page])
+    @platforms = Platform.all
     @platforms = Platform.all
     @tags = Tag.all
   end
