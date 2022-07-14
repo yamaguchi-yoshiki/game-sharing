@@ -6,4 +6,8 @@ class Review < ApplicationRecord
   belongs_to :game
   has_many :sympathies, dependent: :destroy
   has_many :review_comments, dependent: :destroy
+
+  def sympathied_by?(customer)
+    sympathies.where(customer_id: customer.id).exists?
+  end
 end
