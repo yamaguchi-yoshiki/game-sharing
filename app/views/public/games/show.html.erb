@@ -90,6 +90,16 @@
               </div>
               <div class="col-md-3 my-auto">評価:<%= @review.rate %></div>
               <div class="col-md-12 py-2 border-top"><%= @review.comment %></div>
+              <div class="col-md-12 py-2 border-top">
+              <div class="row">
+                <div class="col-1 my-auto">
+                  <i class="far fa-thumbs-up"></i> <%= @review.sympathies.count %>
+                </div>
+                <div class="col-1 offset-1 my-auto">
+                  <i class="fas fa-comment"></i> <%= @review.review_comments.size %>
+                </div>
+              </div>
+            </div>
             </div>
           <% end %>
         <% end %>
@@ -99,7 +109,7 @@
       <% end %>
       <h5>みんなのレビュー</h5>
       <% @reviews.each do |review| %>
-        <%= link_to review_path(review), class: "text-dark text-decoration-none bg-primary" do %>
+        <%= link_to review_path(review), class: "text-dark text-decoration-none" do %>
           <div class="row mt-2 border border-secondary rounded">
             <div class="col-md-7 my-auto"><strong><u><%= review.customer.name %></u></strong></div>
             <div class="col-md-2">
@@ -108,6 +118,16 @@
             </div>
             <div class="col-md-3 my-auto">評価:<%= review.rate %></div>
             <div class="col-md-12 py-2 border-top"><%= review.comment %></div>
+            <div class="col-md-12 py-2 border-top">
+              <div class="row">
+                <div class="col-1 my-auto">
+                  <i class="far fa-thumbs-up"></i> <%= review.sympathies.count %>
+                </div>
+                <div class="col-1 offset-1 my-auto">
+                  <i class="fas fa-comment"></i> <%= review.review_comments.size %>
+                </div>
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>

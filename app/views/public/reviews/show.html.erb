@@ -12,11 +12,26 @@
         <div class="col-md-12"><%= @review.comment %></div>
       </div>
       <div class="row py-2 border-top">
-        <div class="col my-auto">
+        <div class="col-1 my-auto">
+          <% if customer_signed_in? && @review.customer != current_customer %>
+            <% if @review.sympathied_by?(current_customer) %>
+              <%= link_to review_sympathies_path(@review), method: :delete do %>
+                <i class="fas fa-thumbs-up"></i> <%= @review.sympathies.count %>
+              <% end %>
+            <% else %>
+              <%= link_to review_sympathies_path(@review), method: :post do %>
+                <i class="far fa-thumbs-up"></i> <%= @review.sympathies.count %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <i class="far fa-thumbs-up"></i> <%= @review.sympathies.count %>
+          <% end %>
+        </div>
+        <div class="col-1 offset-1 my-auto">
           <i class="fas fa-comment"></i> <%= @review.review_comments.size %>
         </div>
         <% if admin_signed_in? || @review.customer == current_customer %>
-          <div class="col-3">
+          <div class="col-3 ml-auto">
             <%= link_to edit_review_path(@review), class: "btn btn-success" do %>
               <i class="fas fa-edit"></i> レビューを編集
             <% end %>
