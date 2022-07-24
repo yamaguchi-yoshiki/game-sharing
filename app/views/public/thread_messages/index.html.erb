@@ -1,4 +1,5 @@
 <div class='container'>
+  <%= render "public/shared/back", link: customer_path(@customer.id), text: "会員詳細(#{@customer.name})" %>
   <div class="row">
     <div class="my-2">
       <h4 class="title"><%= @customer.name %>のスレッドメッセージ一覧</h4>

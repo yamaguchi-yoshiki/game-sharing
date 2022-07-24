@@ -1,4 +1,5 @@
 <div class='container'>
+  <%= render "public/shared/back", link: game_threads_path(@game.id), text: "スレッド一覧(#{@game.title})" %>
   <div class="row">
     <div class="mt-2"><span><small><strong>"<%= @game.title %>"</strong>のスレッド</small></span></div>
   </div>
