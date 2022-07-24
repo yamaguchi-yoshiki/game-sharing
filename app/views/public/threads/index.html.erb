@@ -1,4 +1,5 @@
 <div class='container'>
+  <%= render "public/shared/back", link: game_path(@game.id), text: "ゲーム詳細(#{@game.title})" %>
   <div class="row">
     <div class="my-2">
       <h4 class="title"><strong>"<%= @game.title %>"</strong>のスレッド一覧</h4>

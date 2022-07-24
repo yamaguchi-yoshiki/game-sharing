@@ -1,4 +1,5 @@
 <div class='container'>
+  <%= render "public/shared/back", link: review_path(@review.id), text: "レビュー詳細(#{@game.title})" %>
   <div class="row">
     <div class="offset-md-1 my-2">
       <h4 class="title">レビューの編集</h4>
