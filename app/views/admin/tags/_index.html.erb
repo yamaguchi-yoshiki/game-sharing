@@ -2,7 +2,7 @@
   <tr>
     <td class="align-middle text-center"><h5><%= tag.name %></h5></td>
     <td class="align-middle text-center">
-      <%= link_to "削除する", admin_tag_path(tag), class: "btn btn-danger", method: :delete %>
+      <%= link_to "削除する", admin_tag_path(tag), class: "btn btn-danger", remote: true, method: :delete %>
     </td>
   </tr>
 <% end %>
