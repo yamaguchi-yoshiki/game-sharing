@@ -16,7 +16,7 @@
     <div class="col-md-3">
       <%= render "public/games/side_bar", tags: @tags, link: games_search_path, sub_title: "新着順" %>
     </div>
-    <div class="col-md-9">
+    <div id="games_index" class="col-md-9">
       <%= render "index", games: @games %>
     </div>
   </div>

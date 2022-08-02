@@ -7,8 +7,8 @@ class Admin::PlatformsController < Admin::ApplicationController
   def create
     @platforms = Platform.all
     @platform = Platform.new
-    platform = Platform.new(platform_params)
-    if platform.save
+    new_platform = Platform.new(platform_params)
+    if new_platform.save
       flash[:notice] = "機種を追加しました"
     end
     render "index"
