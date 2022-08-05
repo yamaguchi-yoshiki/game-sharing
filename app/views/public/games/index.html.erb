@@ -1,12 +1,8 @@
 <div class='container'>
   <%= render "public/games/sub_header", platforms: @platforms %>
   <div class="row">
-    <div class="offset-md-1 my-2">
-      <% if @word == nil %>
-        <h4 class="title">ゲーム一覧<small>(新着順)</small></h4>
-      <% else %>
-        <h4 class="title">検索結果:"<%= @word %>"<small>(新着順,全<%= @total_games.size %>件)</small></h4>
-      <% end %>
+    <div id="search_title" class="offset-md-1 my-2">
+      <%= render "title_index", word: @word, total_games: @total_games %>
     </div>
     <div class="ml-auto">
       <%= link_to "＋ゲームの登録", new_game_path, class: "btn btn-success" %>
