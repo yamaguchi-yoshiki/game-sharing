@@ -1,0 +1,5 @@
+<% if @word == nil %>
+  <h4 class="title">ゲーム一覧<small>(評価順)</small></h4>
+<% else %>
+  <h4 class="title">検索結果:"<%= @word %>"<small>(評価順,全<%= @total_games.size %>件)</small></h4>
+<% end %>

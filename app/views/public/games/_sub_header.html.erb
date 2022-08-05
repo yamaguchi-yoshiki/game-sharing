@@ -3,7 +3,7 @@
     <span>ランキング</span>
   </div>
   <div class="col-md-12">
-    <%= form_with url: rankings_search_path, local: true, method: :get do |f| %>
+    <%= form_with url: rankings_search_path, method: :get do |f| %>
       <%= f.hidden_field :type, :value => "platform" %>
       <table class="table table-sm table-borderless table-responsive">
         <tbody>
@@ -27,7 +27,7 @@
     <span>新着順</span>
   </div>
   <div class="col-md-12">
-    <%= form_with url: games_search_path, local: true, method: :get do |f| %>
+    <%= form_with url: games_search_path, method: :get do |f| %>
       <%= f.hidden_field :type, :value => "platform" %>
       <table class="table table-sm table-borderless table-responsive">
         <tbody>
