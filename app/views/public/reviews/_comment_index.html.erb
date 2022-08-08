@@ -1,0 +1,18 @@
+<% comments.each do |comment| %>
+  <div class="col-12 my-2 border border-secondary rounded">
+    <div class="row my-2">
+      <div class="col-md-6 my-auto">
+        <strong><%= comment.customer.name %></strong>
+        <span class="text-muted"> 投稿時間:<%= comment.created_at.strftime("%Y年%-m月%-d日 %H:%M:%S") %></span>
+      </div>
+      <% if admin_signed_in? || comment.customer == current_customer %>
+        <div class="col-md-2 ml-auto">
+          <%= link_to "削除", review_review_comment_path(review.id, comment.id), class: "btn btn-danger", data: {confirm: "本当に消しますか？" }, remote: true, method: :delete %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-12 py-2 border-top"><%= comment.comment %></div>
+    </div>
+  </div>
+<% end %>
