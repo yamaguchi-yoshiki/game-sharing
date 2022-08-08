@@ -50,30 +50,17 @@
     <div class="col-md-12 mt-2">
       <h3>コメント一覧</h3>
     </div>
-    <% @comments.each do |comment| %>
-      <div class="col-12 my-2 border border-secondary rounded">
-        <div class="row my-2">
-          <div class="col-md-6 my-auto">
-            <strong><%= comment.customer.name %></strong>
-            <span class="text-muted"> 投稿時間:<%= comment.created_at.strftime("%Y年%-m月%-d日 %H:%M:%S") %></span>
-          </div>
-          <% if admin_signed_in? || comment.customer == current_customer %>
-            <div class="col-md-2 ml-auto">
-              <%= link_to "削除", review_review_comment_path(@review.id, comment.id), class: "btn btn-danger", data: {confirm: "本当に消しますか？" }, method: :delete %>
-            </div>
-          <% end %>
-        </div>
-        <div class="row">
-          <div class="col-md-12 py-2 border-top"><%= comment.comment %></div>
-        </div>
+    <div class="col-12">
+      <div id="comment_index" class="row">
+        <%= render "comment_index", comments: @comments, review: @review %>
       </div>
-    <% end %>
+    </div>
     <% if customer_signed_in? %>
       <div class="col-md-6 mx-auto">
         <h6><strong><%= current_customer.name %></strong> としてコメントをする</h6>
-        <%= form_with model: @comment, url: review_review_comments_path(@review.id), method: :post do |f| %>
+        <%= form_with model: @comment, url: review_review_comments_path(@review.id), remote: true, method: :post do |f| %>
           <%= f.label :comment, "コメント" %>
-          <%= f.text_area :comment, class: "form-control" %>
+          <%= f.text_area :comment, id: "comment_field",class: "form-control" %>
           <%= f.hidden_field :review_id, value: @review.id %>
           <div class="mt-2"><%= f.submit "投稿", class: "btn btn-success" %></div>
         <% end %>
