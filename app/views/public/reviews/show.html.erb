@@ -58,9 +58,9 @@
     <% if customer_signed_in? %>
       <div class="col-md-6 mx-auto">
         <h6><strong><%= current_customer.name %></strong> としてコメントをする</h6>
-        <%= form_with model: @comment, url: review_review_comments_path(@review.id), remote: true, method: :post do |f| %>
+        <%= form_with model: @comment, url: review_review_comments_path(@review.id), local: false, method: :post do |f| %>
           <%= f.label :comment, "コメント" %>
-          <%= f.text_area :comment, id: "comment_field",class: "form-control" %>
+          <%= f.text_area :comment, id: "comment_field", class: "form-control" %>
           <%= f.hidden_field :review_id, value: @review.id %>
           <div class="mt-2"><%= f.submit "投稿", class: "btn btn-success" %></div>
         <% end %>

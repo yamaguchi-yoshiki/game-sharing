@@ -3,20 +3,28 @@ class Public::ReviewCommentsController < ApplicationController
   before_action :authenticate_customer!, only: [:create]
 
   def create
-    @comment = current_customer.review_comments.new(review_comment_params)
-    if @comment.save
+    comment = current_customer.review_comments.new(review_comment_params)
+    review_id = comment.review.id
+    if comment.save
       flash[:notice] = "コメントを投稿しました"
     else
       flash[:alert] = "コメントを入力してください"
     end
-    redirect_to review_path(params[:review_id])
+    @review = Review.find(review_id)
+    @comment = ReviewComment.new
+    @comments = @review.review_comments
+    redirect_to request.referer
   end
 
   def destroy
-    @comment = ReviewComment.find(params[:id])
-    @comment.destroy
+    comment = ReviewComment.find(params[:id])
+    review_id = comment.review.id
+    comment.destroy
     flash[:alert] = 'コメントを削除しました'
-    redirect_to review_path(params[:review_id])
+    @review = Review.find(review_id)
+    @comment = ReviewComment.new
+    @comments = @review.review_comments
+    redirect_to request.referer
   end
 
   private
